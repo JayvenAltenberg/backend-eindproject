@@ -3,6 +3,7 @@
 
 <head>
     <?php
+    include_once("db.php");
     $filename = 'homepage';
     include 'includes/head.php';
     ?>
