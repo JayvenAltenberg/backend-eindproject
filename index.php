@@ -18,7 +18,7 @@
         <div class="page-container">
             <div>
                 <h1>2.0 products</h1>
-                <a href="#" class="shop-now-btn">shop now</a>
+                <a href="products.php" class="shop-now-btn">shop now</a>
             </div>
         </div>
         <h1>trending</h1>

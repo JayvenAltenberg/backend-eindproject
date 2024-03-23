@@ -23,15 +23,17 @@
                 <div class="product-info">
                     <h2> <?php echo $product['name'] ?> </h2>
                     <img class="product-img" src="images/<?php echo $product['img'] ?>" alt="product-img">
-                    <p> <?php echo $product['price'] ?></p>
+                    <p> €<?php echo $product['price'] ?></p>
+                    <a href="products.php" class="btn">add to cart</a>
+                    <a href="products.php" class="btn">vieuw details</a>
                 </div>
             </div>
-<?php endforeach; ?>
+        <?php endforeach; ?>
     </div>
 
-<?php
-include 'includes/footer.php';
-?>
+    <?php
+    include 'includes/footer.php';
+    ?>
 
 </body>
 
