@@ -25,7 +25,7 @@
                     <img class="product-img" src="images/<?php echo $product['img'] ?>" alt="product-img">
                     <p> €<?php echo $product['price'] ?></p>
                     <a href="products.php" class="btn">add to cart</a>
-                    <a href="products.php" class="btn">vieuw details</a>
+                    <a href="detail.php" class="btn">vieuw details</a>
                 </div>
             </div>
         <?php endforeach; ?>
