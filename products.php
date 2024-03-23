@@ -16,22 +16,22 @@
 
     $sql = $pdo->prepare("SELECT * FROM `products`");
     $sql->execute();
-    foreach ($sql as $product): ?>
-        <div class="product-container">
-            <div class="product-img">
-                <img src="images/<?php echo $product['img']?>" alt="product-img">
-            </div>
-            <div class="product-info">
-                <h2> <?php echo $product['name']?> </h2>
-                <p> <?php  echo $product['content']?>  </p>
-                <p> <?php echo $product['price'] ?></p>
-            </div>
-        </div>';
-    <?php endforeach; ?>
-
-    <?php
-    include 'includes/footer.php';
     ?>
+    <div class="products-container">
+        <?php foreach ($sql as $product) : ?>
+            <div class="product-container">
+                <div class="product-info">
+                    <h2> <?php echo $product['name'] ?> </h2>
+                    <img class="product-img" src="images/<?php echo $product['img'] ?>" alt="product-img">
+                    <p> <?php echo $product['price'] ?></p>
+                </div>
+            </div>
+<?php endforeach; ?>
+    </div>
+
+<?php
+include 'includes/footer.php';
+?>
 
 </body>
 

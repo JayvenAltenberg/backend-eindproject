@@ -140,3 +140,25 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #45a049;
 }
+.product-container {
+    display: flex;
+    margin: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    overflow: hidden;
+    width: 300px;
+}
+
+.product-img {
+    max-height: 200px;
+    padding: 20px;
+}
+
+.products-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
