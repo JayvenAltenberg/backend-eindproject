@@ -201,3 +201,14 @@ input[type="submit"]:hover {
     justify-content: center;
     align-items: start;
 }
+.low-stock-text {
+    background-color: #ff6347;
+    /* Red */
+    color: #fff;
+    /* White text */
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+}

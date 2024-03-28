@@ -22,6 +22,11 @@ session_start();
     <div class="detail-container">
         <h2> <?php echo $product['name'] ?> </h2>
         <section class="detail-content">
+
+            <?php if ($product['stock'] > 9) : ?>
+                <p class="low-stock-text">Low Stock</p>
+            <?php endif; ?>
+
             <figure>
                 <img src="images/<?php echo $product['img'] ?>" alt="product-img">
             </figure>
