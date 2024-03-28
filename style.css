@@ -42,6 +42,7 @@ a {
 }
 
 .site-footer {
+    margin-top: auto;
     background-color: #1e1e1e;
     color: #fff;
 }
@@ -179,4 +180,24 @@ input[type="submit"]:hover {
 .btn:hover {
     background-color: #45a049;
     text-decoration: none;
+}
+.detail-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    max-width: 250px;
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
 }

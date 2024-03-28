@@ -17,17 +17,24 @@ session_start();
     $id = $_GET['id'];
     $sql = $pdo->prepare("SELECT * FROM `products` WHERE `id` =$id");
     $sql->execute();
-    foreach ($sql as $product) : ?>
-        <div class="product-container">
-            <div class="product-info">
-                <h2> <?php echo $product['name'] ?> </h2>
-                <img class="product-img" src="images/<?php echo $product['img'] ?>" alt="product-img">
+    $product = $sql->fetch(PDO::FETCH_ASSOC);
+    ?>
+    <div class="detail-container">
+        <h2> <?php echo $product['name'] ?> </h2>
+        <section class="detail-content">
+            <figure>
+                <img src="images/<?php echo $product['img'] ?>" alt="product-img">
+            </figure>
+            <div class="description">
+                <h2>price</h2>
                 <p> €<?php echo $product['price'] ?></p>
                 <a href="products.php" class="btn">add to cart</a>
-                <a href="detail.php" class="btn">vieuw details</a>
+                <a href="products.php" class="btn">buy now</a>
+                <h2>Description</h2>
+                <p> <?php echo $product['content'] ?></p>
             </div>
-        </div>
-    <?php endforeach; ?>
+        </section>
+    </div>
 
 
     <?php
