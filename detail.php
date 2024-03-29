@@ -13,6 +13,10 @@ session_start();
 
 <body>
     <?php
+    //cart functions
+    function addToCart($id){
+        
+    }
     include 'includes/navbar.php';
     $id = $_GET['id'];
     $sql = $pdo->prepare("SELECT * FROM `products` WHERE `id` =$id");
