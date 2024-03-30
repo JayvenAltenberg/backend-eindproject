@@ -38,6 +38,11 @@ session_start();
                     <button type="submit" class="btn">Add to Cart</button>
                 </form>
                 <a href="products.php" class="btn">Buy Now</a>
+                <?php if (isset($_SESSION['product_status'])) {
+                    echo $_SESSION['product_status'];
+                    unset($_SESSION['product_status']);
+                }
+                ?>
                 <h2>Description</h2>
                 <p><?php echo $product['content'] ?></p>
             </div>

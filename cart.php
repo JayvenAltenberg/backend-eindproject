@@ -15,9 +15,7 @@ include_once "db.php";
 <body>
     <?php
     include 'includes/navbar.php';
-    echo $_SESSION['cart'];
     foreach ($_SESSION['cart'] as $id) :
-        echo 'hey';
         $sql = $pdo->prepare("SELECT * FROM `products` WHERE `id` = ?");
         $sql->execute([$id]);
         $product = $sql->fetch(PDO::FETCH_ASSOC);
