@@ -15,6 +15,9 @@ include_once "db.php";
 <body>
     <?php
     include 'includes/navbar.php';
+    ?>
+    <div class="cart-container">
+    <?php
     foreach ($_SESSION['cart'] as $id) :
         $sql = $pdo->prepare("SELECT * FROM `products` WHERE `id` = ?");
         $sql->execute([$id]);
@@ -23,7 +26,7 @@ include_once "db.php";
     ?>
             <div class="item-card">
                 <a href="product_details.php?id=<?= $product['id'] ?>">
-                <img src="images/<?php echo $product['img'] ?>" alt="product-img">
+                <img class="cart-img" src="images/<?php echo $product['img'] ?>" alt="product-img">
                 </a>
                 <div class="item-details">
                     <h3 class="item-name"><?= $product['name'] ?></h3>
@@ -34,7 +37,7 @@ include_once "db.php";
         endif;
     endforeach;
     ?>
-
+    </div>
 
 
     <?php
