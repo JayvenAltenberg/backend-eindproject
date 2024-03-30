@@ -13,10 +13,6 @@ session_start();
 
 <body>
     <?php
-    //cart functions
-    function addToCart($id){
-        
-    }
     include 'includes/navbar.php';
     $id = $_GET['id'];
     $sql = $pdo->prepare("SELECT * FROM `products` WHERE `id` =$id");
@@ -35,13 +31,17 @@ session_start();
                 <img src="images/<?php echo $product['img'] ?>" alt="product-img">
             </figure>
             <div class="description">
-                <h2>price</h2>
-                <p> €<?php echo $product['price'] ?></p>
-                <a href="products.php" class="btn">add to cart</a>
-                <a href="products.php" class="btn">buy now</a>
+                <h2>Price</h2>
+                <p>€<?php echo $product['price'] ?></p>
+                <form method="post" action="addToCart.php">
+                    <input type="hidden" name="product_id" value="<?php echo $id; ?>">
+                    <button type="submit" class="btn">Add to Cart</button>
+                </form>
+                <a href="products.php" class="btn">Buy Now</a>
                 <h2>Description</h2>
-                <p> <?php echo $product['content'] ?></p>
+                <p><?php echo $product['content'] ?></p>
             </div>
+
         </section>
     </div>
 

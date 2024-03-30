@@ -9,6 +9,8 @@
     </div>
     <div class="navbar-end">
         <p>login</p>
+        <a href="cart.php">
         <img class="cart" src="cart.png" alt="shopping-cart">
+        </a>
     </div>
 </nav>

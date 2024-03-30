@@ -26,6 +26,9 @@
                     <p> €<?= $product['price'] ?></p>
                     <a href="products.php" class="btn">add to cart</a>
                     <a href="detail.php?id=<?= $product['id'] ?>" class="btn">vieuw details</a>
+                    <?php
+                    echo $_SESSION['cart'];
+                    ?>
                 </div>
             </div>
         <?php endforeach; ?>
