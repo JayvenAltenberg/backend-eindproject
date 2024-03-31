@@ -17,6 +17,12 @@ session_start();
     $id = $_GET['id'];
     $sql = $pdo->prepare("SELECT * FROM `products` WHERE `id` =$id");
     $sql->execute();
+    
+    //views product
+    $views = "UPDATE products SET views = views + 1 WHERE id = ?";
+    $stmt = $pdo->prepare($views);
+    $stmt->execute([$id]);
+
     $product = $sql->fetch(PDO::FETCH_ASSOC);
     ?>
     <div class="detail-container">

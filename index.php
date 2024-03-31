@@ -22,6 +22,26 @@
             </div>
         </div>
         <h1>trending</h1>
+        <div class="products-container">
+            <?php
+            //trending products
+            $sql = "SELECT * FROM products ORDER BY views DESC LIMIT 4";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $trending_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($trending_products as $product) {
+            ?>
+                <div class="product-container">
+                    <img class="product-img" src="images/<?php echo $product['img']; ?>" alt="<?php echo $product['name']; ?>">
+                    <h2><?php echo $product['name']; ?></h2>
+                    <p>Price: €<?php echo $product['price']; ?></p>
+                    <a class="btn" href="detail.php?id=<?php echo $product['id']; ?>">View Details</a>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
     </main>
 
     <!--footer-->

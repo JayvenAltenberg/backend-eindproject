@@ -20,14 +20,11 @@
     <div class="products-container">
         <?php foreach ($sql as $product) : ?>
             <div class="product-container">
-                <div class="product-info">
-                    <h2> <?= $product['name'] ?> </h2>
-                    <img class="product-img" src="images/<?= $product['img'] ?>" alt="product-img">
-                    <p> €<?= $product['price'] ?></p>
-                    <a href="products.php" class="btn">add to cart</a>
-                    <a href="detail.php?id=<?= $product['id'] ?>" class="btn">vieuw details</a>
+                    <img class="product-img" src="images/<?php echo $product['img']; ?>" alt="<?php echo $product['name']; ?>">
+                    <h2><?php echo $product['name']; ?></h2>
+                    <p>Price: €<?php echo $product['price']; ?></p>
+                    <a class="btn" href="detail.php?id=<?php echo $product['id']; ?>">View Details</a>
                 </div>
-            </div>
         <?php endforeach; ?>
     </div>
 
