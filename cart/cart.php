@@ -2,7 +2,7 @@
 <html>
 <?php
 session_start();
-include_once "db.php";
+include_once "../includes/db.php";
 ?>
 
 <head>
@@ -18,39 +18,43 @@ include_once "db.php";
     ?>
     <div class="cart-container">
         <?php
-        foreach ($_SESSION['cart'] as $id) :
-            $sql = $pdo->prepare("SELECT * FROM `products` WHERE `id` = ?");
-            $sql->execute([$id]);
-            $product = $sql->fetch(PDO::FETCH_ASSOC);
-            if ($product) :
-                $price += $product['price'];
+        if (!empty($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $id) :
+                $sql = $pdo->prepare("SELECT * FROM `products` WHERE `id` = ?");
+                $sql->execute([$id]);
+                $product = $sql->fetch(PDO::FETCH_ASSOC);
+                if ($product) :
+                    $price += $product['price'];
         ?>
-                <div class="item-card">
-                    <a href="product_details.php?id=<?= $product['id'] ?>">
-                        <img class="cart-img" src="images/<?php echo $product['img'] ?>" alt="product-img">
-                    </a>
-                    <div class="item-details">
-                        <h3 class="item-name"><?= $product['name'] ?></h3>
-                        <p class="item-price">€<?= $product['price'] ?></p>
+                    <div class="item-card">
+                        <a href="../items/detail.php?id=<?= $product['id'] ?>">
+                            <img class="cart-img" src="../images/<?php echo $product['img'] ?>" alt="product-img">
+                        </a>
+                        <div class="item-details">
+                            <h3 class="item-name"><?= $product['name'] ?></h3>
+                            <p class="item-price">€<?= $product['price'] ?></p>
+                        </div>
                     </div>
-                </div>
         <?php
-            endif;
-        endforeach;
+                endif;
+            endforeach;
+        } else {
+            echo 'Your cart is empty!';
+        }
         ?>
-        <div class="total">
-            <div class="total-price">
-                <h3>Total: €<?= $price ?></h3>
+        <?php if (!empty($_SESSION['cart'])) : ?>
+            <div class="total">
+                <div class="total-price">
+                    <h3>Total: €<?= $price ?></h3>
+                </div>
+                <div class="checkout">
+                    <a href="checkout.php">
+                        <button type="button" class="btn">Checkout</button>
+                    </a>
+                </div>
             </div>
-            <div class="checkout">
-                <a href="checkout.php">
-                    <button type="button" class="btn">Checkout</button>
-                </a>
-            </div>
-        </div>
+        <?php endif; ?>
     </div>
-    </div>
-
     <?php
     include '../includes/footer.php';
     ?>
