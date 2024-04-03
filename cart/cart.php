@@ -8,13 +8,13 @@ include_once "db.php";
 <head>
     <?php
     $filenames = "cart";
-    include 'includes/head.php';
+    include '../includes/head.php';
     ?>
 </head>
 
 <body>
     <?php
-    include 'includes/navbar.php';
+    include '../includes/navbar.php';
     ?>
     <div class="cart-container">
         <?php
@@ -52,7 +52,7 @@ include_once "db.php";
     </div>
 
     <?php
-    include 'includes/footer.php';
+    include '../includes/footer.php';
     ?>
 </body>
 
