@@ -36,7 +36,7 @@
                     <img class="product-img" src="../images/<?php echo $product['img']; ?>" alt="<?php echo $product['name']; ?>">
                     <h2><?php echo $product['name']; ?></h2>
                     <p>Price: €<?php echo $product['price']; ?></p>
-                    <a class="btn" href="detail.php?id=<?php echo $product['id']; ?>">View Details</a>
+                    <a class="btn" href="../items/detail.php?id=<?php echo $product['id']; ?>">View Details</a>
                 </div>
             <?php
             }
