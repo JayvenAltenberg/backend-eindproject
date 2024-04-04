@@ -10,7 +10,7 @@
                 <ul class="footer-links">
                     <li><a href="../homepage/index.php">Home</a></li>
                     <li><a href="../items/products.php">Shop</a></li>
-                    <li><a href="../items/contact.php">Contact</a></li>
+                    <li><a href="../contact/contact.php">Contact</a></li>
                 </ul>
             </div>
             <div>

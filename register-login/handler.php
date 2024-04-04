@@ -2,15 +2,13 @@
 
 session_start();
 
+require_once "../vendor/autoload.php";
+include_once "../includes/.env";
 include("db.php");
 //Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-
-
-//dotnet require
-require_once __DIR__ . "/vendor/autoload.php";
 
 // Load environment variables from a .env file
 use Dotenv\Dotenv;
@@ -44,7 +42,7 @@ function verify_email($username, $email, $token)
         $mail->Subject = 'email verifacation from 2.0 products';
         $mail->Body    = "<p>Hello $username,</p>
         <p>Thank you for registering with our website. To complete your registration, please click the following link:</p>
-        <p><a href='http://localhost:8000/verify-email.php?token=$token'>Verify Email</a></p>
+        <p><a href='http://localhost:8000/register-login/verify-email.php?token=$token'>Verify Email</a></p>
         <p>If you didn't register on our website, please ignore this email.</p>
         <p>Best regards,<br>2.0 products Team ;)</p>
     ";

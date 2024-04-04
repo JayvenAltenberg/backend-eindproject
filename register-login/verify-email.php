@@ -2,7 +2,7 @@
 include('db.php');
 session_start();
 if ($_SESSION['status'] != true) {
-        header("location: index.php");
+        header("location: register.php");
 }
 
 if (isset($_GET['token'])) {
@@ -15,18 +15,18 @@ if (isset($_GET['token'])) {
                         $sql = $pdo->prepare("UPDATE `users` SET `verify_status` = '1' WHERE `token`='$token' LIMIT 1");
                         if ($sql->execute()) {
                                 $_SESSION['status'] = "Email verified";
-                                header("location: index.php");
+                                header("location: register.php");
                         } else {
                                 $_SESSION['error'] = 'could not verify email try again later';
-                                header("location: index.php");
+                                header("register: index.php");
                         }
                 } else {
                         $_SESSION['error'] = 'email already verified';
-                        header("location: index.php");
+                        header("location: register.php");
                         exit();
                 }
         } else {
                 $_SESSION['error'] = 'could not verify email try again later';
-                header("location: index.php");
+                header("location: register.php");
         }
 }
