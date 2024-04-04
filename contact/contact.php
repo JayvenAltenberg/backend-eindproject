@@ -17,7 +17,7 @@ include_once '../includes/db.php';
     ?>
         <div class="container">
         <h1>Contact Us</h1>
-        <form action="#" method="post">
+        <form action="contact_handler.php" method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 

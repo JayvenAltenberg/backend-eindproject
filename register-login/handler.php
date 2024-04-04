@@ -3,8 +3,7 @@
 session_start();
 
 require_once "../vendor/autoload.php";
-include_once "../includes/.env";
-include("db.php");
+include("../includes/db.php");
 //Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;

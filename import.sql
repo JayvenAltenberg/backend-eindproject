@@ -78,3 +78,23 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `token`, `verify_sta
 (13, 'Onomis', 'onomis2@outlook.com', '8jaar', '655588a92ddccf48f1cd01bcfada9fd1', 0),
 (14, 'gormeituxss', 'dillonsingh@hotmail.com', '123', 'e46e9d6cf6ef95fe1e9767bea95803b5', 0),
 (15, 'blastissue', 'felix.huel6@gmail.com', 'Felix', 'cd57329c7702799b3a1b5547d4a0352d', 0);
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `weight` int(11) DEFAULT NULL,
+  `material` varchar(50) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL
+);
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL
+);
+
+ALTER TABLE `products` ADD PRIMARY KEY (`id`);
+ALTER TABLE `users` ADD PRIMARY KEY (`id`);
