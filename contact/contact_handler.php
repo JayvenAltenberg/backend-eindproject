@@ -46,7 +46,7 @@ function verify_email($username, $message, $email)
             header("location: contact.php");
         }
         echo 'Message has been sent';
-        $_SESSION['status'] = true;
+        $_SESSION['status'] = 'Message has been sent';
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }

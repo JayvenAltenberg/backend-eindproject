@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if (isset($_SESSION['cart'])) {
+        $cart_amount = count($_SESSION['cart']) -1;
+    } else {
+        $cart_amount = 0;
+    }
+?>
+
 <nav class="navbar">
     <p class="logo">logo</p>
     <div class="navbar-content">
@@ -13,5 +22,6 @@
         <a href="../cart/cart.php">
             <img class="cart" src="../includes/cart.png" alt="shopping-cart">
         </a>
+        <span class="cart-count"><?= $cart_amount; ?></span>
     </div>
 </nav>

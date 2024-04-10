@@ -47,8 +47,7 @@ function verify_email($username, $email, $token)
     ";
 
         $mail->send();
-        echo 'Message has been sent';
-        $_SESSION['status'] = true;
+        $_SESSION['status'] = 'Message has been sent';
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
@@ -58,18 +57,16 @@ function verify_email($username, $email, $token)
 if (isset($_POST['submit'])) {
     $errors = [];
     //naming veriables
-    $repeat_password = $_POST['confirm_password'];
-    $password = $_POST['password'];
     $email = $_POST['email'];
     $username = $_POST['username'];
     $token = md5(rand());
 
 }
-
-    // Check if passwords match
-    if ($repeat_password != $password) {
-        $errors['password'] = 'passwords do not match!';
-    }
+//validating email
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {   
+    $_SESSION['errors'] = $email . ' is NOT a valid email address.';
+    header("location: register.php");
+}
 
     // Check if email already exists
     $sql = $pdo->prepare("SELECT * FROM `users` WHERE `email` = ?");
@@ -84,16 +81,17 @@ if (isset($_POST['submit'])) {
         foreach ($errors as $error) {
             $_SESSION['errors'] = $error;
         }
-        header("location: index.php?");
+        header("location: register.php");
         exit();
     }
     verify_email($username, $email, $token);
     //insert into the database
-    $sql = $pdo->prepare("INSERT INTO `users` (`email`, `username`, `password`,`token`) VALUES (?,?,?,?)");
-    if ($sql->execute([$email, $username, $password, $token])) {
-        echo 'registration successful! Please verify your email';
+    $sql = $pdo->prepare("INSERT INTO `users` (`email`, `username`,`token`) VALUES (?,?,?)");
+    if ($sql->execute([$email, $username, $token])) {
+        $_SESSION['status'] = 'registration successful! Please verify your email';
+        header("location: register.php");
     } else {
         $_SESSION['errors'] = 'registration error';
-        header("location: index.php");
+        header("location: register.php");
     }
 

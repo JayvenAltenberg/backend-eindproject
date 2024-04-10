@@ -28,6 +28,10 @@ include_once '../includes/db.php';
             <textarea id="message" name="message" rows="5" required></textarea>
 
             <input type="submit" value="Submit">
+            <?php if (isset ($_SESSION['status'])) {
+                echo $_SESSION['status'];
+                unset($_SESSION['status']);
+            } ?>
         </form>
     </div>
     <?php

@@ -1,9 +1,6 @@
 <?php
-include('db.php');
+include('../includes/db.php');
 session_start();
-if ($_SESSION['status'] != true) {
-        header("location: register.php");
-}
 
 if (isset($_GET['token'])) {
         $token = $_GET['token'];
@@ -18,7 +15,7 @@ if (isset($_GET['token'])) {
                                 header("location: register.php");
                         } else {
                                 $_SESSION['error'] = 'could not verify email try again later';
-                                header("register: index.php");
+                                header("location: register.php");
                         }
                 } else {
                         $_SESSION['error'] = 'email already verified';
