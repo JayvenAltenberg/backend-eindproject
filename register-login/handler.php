@@ -60,6 +60,9 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $username = $_POST['username'];
     $token = md5(rand());
+    $_SESSION['coupon'] = $coupon = md5(rand());
+    $_SESSION['email'] = $email;
+    $_SESSION['username'] = $username;
 
 }
 //validating email
@@ -89,6 +92,8 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $sql = $pdo->prepare("INSERT INTO `users` (`email`, `username`,`token`) VALUES (?,?,?)");
     if ($sql->execute([$email, $username, $token])) {
         $_SESSION['status'] = 'registration successful! Please verify your email';
+        $sql = $pdo->prepare("INSERT INTO `coupon` (`code`, `discount`) values(?,?)");
+        $sql->execute([$coupon, 5]);
         header("location: register.php");
     } else {
         $_SESSION['errors'] = 'registration error';

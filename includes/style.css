@@ -301,7 +301,7 @@ input[type="submit"]:hover {
 }
 
 .logo {
-padding-left: 10px;
+    padding-left: 10px;
     width: 40px;
     height: 40px;
 }

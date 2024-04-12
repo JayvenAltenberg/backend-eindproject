@@ -56,15 +56,40 @@ include_once "../includes/db.php";
         <?php endif; ?>
     </div>
     <div class="coupon-form">
-                    <form action="apply_coupon.php" method="post">
+                    <form action="#" method="post">
                         <label for="coupon_code">Coupon Code:</label>
                         <input type="text" id="coupon_code" name="coupon_code">
                         <button type="submit" class="btn">Apply Coupon</button>
                     </form>
+                    <?php
+                        if (isset($status)) {
+                            echo $status;
+                            unset($status);
+                        }
+                    ?>
                 </div>
     <?php
     include '../includes/footer.php';
     ?>
 </body>
+<?php
+    if (isset($_POST['coupon_code'])) {
+        $coupon_code = $_POST['coupon_code'];
+        $sql = $pdo->prepare("SELECT * FROM `coupon` WHERE `code` = ?");
+        $sql->execute([$coupon_code]);
+        $coupon = $pdo-> prepare("SELECT * FROM `coupon`");
+        $coupon->execute();
+        foreach ($coupon as $coupon) {
+            if ($coupon['code'] == $coupon_code) {
+                $status = 'coupon code added successfully';
+                $price -= $coupon['discount'];
+            } else {
+                $status = "Invalid coupon";
+            }
+        }
+        
+        
+    }
+?>
 
 </html>
