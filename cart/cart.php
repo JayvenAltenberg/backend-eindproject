@@ -55,6 +55,13 @@ include_once "../includes/db.php";
             </div>
         <?php endif; ?>
     </div>
+    <div class="coupon-form">
+                    <form action="apply_coupon.php" method="post">
+                        <label for="coupon_code">Coupon Code:</label>
+                        <input type="text" id="coupon_code" name="coupon_code">
+                        <button type="submit" class="btn">Apply Coupon</button>
+                    </form>
+                </div>
     <?php
     include '../includes/footer.php';
     ?>
