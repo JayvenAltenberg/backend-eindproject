@@ -17,6 +17,10 @@
     $sql = $pdo->prepare("SELECT * FROM `products`");
     $sql->execute();
     ?>
+    <div class="search-container">
+  <input type="text" class="search-bar" placeholder="Search...">
+  <button type="button" class="search-button">Search</button>
+</div>
     <div class="products-container">
         <?php foreach ($sql as $product) : ?>
             <div class="product-container">

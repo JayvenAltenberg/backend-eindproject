@@ -305,3 +305,26 @@ input[type="submit"]:hover {
     width: 40px;
     height: 40px;
 }
+
+.search-container {
+    margin: 20px auto;
+    width: 300px;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+}
+
+.search-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+}
