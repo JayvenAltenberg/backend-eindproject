@@ -1,9 +1,36 @@
-<!DOCTYPE html>
-<html>
 <?php
 session_start();
 include_once "../includes/db.php";
+
+function coupon_code($pdo, $coupon_code) {
+    if (isset($_POST['coupon_code'])) {
+        $sql = $pdo->prepare("SELECT * FROM `coupon` WHERE `code` = ?");
+        $sql->execute([$coupon_code]);
+        $coupon = $sql->fetch(PDO::FETCH_ASSOC);
+
+        if ($coupon) {
+            $status = "Valid coupon code";
+            $discount = $coupon['discount'];
+            $_SESSION['coupon_discount'] = $discount;
+            return $status;
+        } else {
+            $status = "Invalid coupon code";
+            return $status;
+        }
+    }
+}
+
+
+$status = '';
+if (isset($_POST['coupon_code'])) {
+    $coupon_code = $_POST['coupon_code'];
+    $status = coupon_code($pdo, $coupon_code);
+}
+
 ?>
+
+<!DOCTYPE html>
+<html>
 
 <head>
     <?php
@@ -18,6 +45,7 @@ include_once "../includes/db.php";
     ?>
     <div class="cart-container">
         <?php
+        $price = 0;
         if (!empty($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $id) :
                 $sql = $pdo->prepare("SELECT * FROM `products` WHERE `id` = ?");
@@ -46,50 +74,33 @@ include_once "../includes/db.php";
             <div class="total">
                 <div class="total-price">
                     <h3>Total: €<?= $price ?></h3>
+                    <?php
+                    if (!empty($_SESSION['coupon_discount'])) {
+                        $price -= $_SESSION['coupon_discount'];
+                        echo "<p>Coupon Applied: -€{$_SESSION['coupon_discount']}</p>";
+                        echo "<p>Total with coupon: €{$price}</p>";
+                    }
+                    ?>
                 </div>
                 <div class="checkout">
                     <a href="checkout.php">
                         <button type="button" class="btn">Checkout</button>
                     </a>
+                    <div><?php echo $status; ?></div>
                 </div>
             </div>
         <?php endif; ?>
     </div>
     <div class="coupon-form">
-                    <form action="#" method="post">
-                        <label for="coupon_code">Coupon Code:</label>
-                        <input type="text" id="coupon_code" name="coupon_code">
-                        <button type="submit" class="btn">Apply Coupon</button>
-                    </form>
-                    <?php
-                        if (isset($status)) {
-                            echo $status;
-                            unset($status);
-                        }
-                    ?>
-                </div>
+        <form action="#" method="post">
+            <label for="coupon_code">Coupon Code:</label>
+            <input type="text" id="coupon_code" name="coupon_code">
+            <button type="submit" class="btn">Apply Coupon</button>
+        </form>
+    </div>
     <?php
     include '../includes/footer.php';
     ?>
 </body>
-<?php
-    if (isset($_POST['coupon_code'])) {
-        $coupon_code = $_POST['coupon_code'];
-        $sql = $pdo->prepare("SELECT * FROM `coupon` WHERE `code` = ?");
-        $sql->execute([$coupon_code]);
-        $coupon = $pdo-> prepare("SELECT * FROM `coupon`");
-        $coupon->execute();
-        foreach ($coupon as $coupon) {
-            if ($coupon['code'] == $coupon_code) {
-                $status = 'coupon code added successfully';
-                $price -= $coupon['discount'];
-            } else {
-                $status = "Invalid coupon";
-            }
-        }
-        
-        
-    }
-?>
 
 </html>
