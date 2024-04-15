@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
     <header>
         <?php include '../includes/navbar.php'; ?>
     </header>
@@ -48,5 +49,4 @@
     <!--footer-->
     <?php include '../includes/footer.php'; ?>
 </body>
-
 </html>
