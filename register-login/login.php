@@ -18,13 +18,13 @@ require_once '../includes/db.php';
         <h2>login</h2>
 
 
-        <form action="handler.php" method="POST">
+        <form action="#" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
-                <label for="email">password</label>
+                <label for="password">password</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <?php
@@ -46,7 +46,27 @@ require_once '../includes/db.php';
             </div>
         </form>
     </div>
-
+            <?php
+            if (!isset($_SESSION['logged_in'])){
+                $sql = "SELECT * FROM admin";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute();
+                $login = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                if ($login['username'] == $_POST['username'] && $login['password'] == $_POST['password']) {
+                    $_SESSION['username'] = $_POST['username'];
+                    $_SESSION['status'] = "You are logged in";
+                    $_SESSION['logged_in'] = true;
+                    header("location: ../homepage/index.php");
+                    exit();
+                } else {
+                    $_SESSION['errors'] = "Invalid username or password";
+                }
+            }
+                    if (isset($_SESSION['logged_in'])) {
+                        unset($_SESSION['logged_in']);
+                        header("location: ../homepage/index.php");
+                    }
+            ?>
 </body>
 
 </html>

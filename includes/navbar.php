@@ -14,7 +14,7 @@ if (isset($_SESSION['cart'])) {
     <div class="navbar-content">
         <a href="../homepage/index.php">Home</a>
         <a href="../register-login/register.php">Register</a>
-        <a href="add.php">Add</a>
+        <?php echo (isset($_SESSION['logged_in'])) ? '<a href="add.php">Add</a>' : ''; ?>
         <a href="../items/products.php">Shop</a>
         <a href="../contact/contact.php">Contact</a>
     </div>
