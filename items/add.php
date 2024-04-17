@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
-include_once "db.php";
+include_once "../includes/db.php";
 
 
 // Check if the form is submitted
@@ -13,6 +13,7 @@ if (isset($_POST['submit'])) {
     $material = $_POST['material'];
     $content = $_POST['content'];
     $price = $_POST['price'];
+    $stock = $_POST['stock'];
 
     // File
     $file_name = $_FILES['image']['name'];
@@ -21,8 +22,8 @@ if (isset($_POST['submit'])) {
     move_uploaded_file($tempname, $folder);
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO products (`name`, `weight`, `material`, `content`, `price`, `img`) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$name, $weight, $material, $content, $price, $file_name]);
+        $stmt = $pdo->prepare("INSERT INTO products (`name`, `weight`, `material`, `content`, `price`, `img`, `stock`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$name, $weight, $material, $content, $price, $file_name , $stock]);
         // Check if the insertion was successful
         if ($stmt) {
             echo "Data inserted successfully.";
@@ -39,16 +40,14 @@ if (isset($_POST['submit'])) {
 <head>
     <?php
     $filename = 'add product';
-    include 'includes/head.php';
+    include '../includes/head.php';
     ?>
 </head>
 
 <body>
     <header>
-        <?php include 'includes/navbar.php'; ?>
+        <?php include '../includes/navbar.php'; ?>
     </header>
-
-    <main>
         <form class="form" action="#" method="post" enctype="multipart/form-data">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
@@ -64,10 +63,15 @@ if (isset($_POST['submit'])) {
 
             <label for="name">price:</label>
             <input type="text" id="price" name="price" required>
+
+                <label for="stock">stock:</label>
+                <input type="number" name="stock" id="stock">
+
             <div>
                 <label for="file">picture:</label>
                 <input class="file" type="file" name="image" id="image">
             </div>
+
             <div>
                 <input type="submit" value="Submit" name="submit">
             </div>
@@ -75,7 +79,7 @@ if (isset($_POST['submit'])) {
     </main>
 
     <!--footer-->
-    <?php include 'includes/footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
 </body>
 
 </html>
