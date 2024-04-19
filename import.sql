@@ -1,33 +1,10 @@
-CREATE TABLE `orders` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `hash` VARCHAR(255) NOT NULL,
-  `total` FLOAT NOT NULL,
-  `address_id` INT(11) NOT NULL,
-  `paid` TINYINT(1) NOT NULL,
-  `customer_id` INT(11) NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
+DROP DATABASE IF EXISTS `2.0_products`;
 
-CREATE TABLE `orders_products` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `order_id` INT(11) NOT NULL,
-  `product_id` INT(11) NOT NULL,
-  `quantity` INT(11) NOT NULL,
-  PRIMARY KEY (`id`)
-);
+CREATE DATABASE `2.0_products`;
 
-CREATE TABLE `payments` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `order_id` INT(11) NOT NULL,
-  `success` TINYINT(1) NOT NULL,
-  `transaction_id` VARCHAR(255) DEFAULT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
+USE `2.0_products`;
 
+-- Create the 'products' table
 CREATE TABLE `products` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) DEFAULT NULL,
@@ -41,60 +18,77 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `users` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(50) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  `token` VARCHAR(255) NOT NULL,
-  `verify_status` INT(2) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-);
-
+-- Insert data into the 'products' table
 INSERT INTO `products` (`id`, `name`, `weight`, `material`, `content`, `stock`, `price`, `img`, `views`) VALUES
-(5, 'hert', 204, 'stof', '- Nederlandse handleiding - Linnen Canvas, 40 x 50 CM met voorbedrukte nummers - Verf in hersluitbare potjes, voorzien van nummers - Voorbeeld - Penselen (3x) - Haakjes om je meesterwerk mee op te hangen', 10, 9.95, 'hert.jpg', 0),
-(6, 'ballet', 242, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'ballet.jpg', 1),
-(8, 'Boeddha - Water', 245, 'stof', 'innen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'boedha.jpg', 1),
-(9, 'Paarden', 198, 'stof', 'Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'paarden.jpg', 1),
-(10, 'Beauty and the beast', 229, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'beuty and the beast.jpg', 2),
-(11, 'Leeuw - Zonnebril', 290, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'leeuw-zonnebril.jpg', 0),
-(12, 'kat-vis', 175, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'kat-vis.jpg', 1),
+(5, 'hert', 204, 'stof', '- Nederlandse handleiding - Linnen Canvas, 40 x 50 CM met voorbedrukte nummers - Verf in hersluitbare potjes, voorzien van nummers - Voorbeeld - Penselen (3x) - Haakjes om je meesterwerk mee op te hangen', 10, 9.95, 'hert.jpg', 2),
+(6, 'ballet', 242, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'ballet.jpg', 47),
+(8, 'Boeddha - Water', 245, 'stof', 'innen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'boedha.jpg', 32),
+(9, 'Paarden', 198, 'stof', 'Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'paarden.jpg', 5),
+(10, 'Beauty and the beast', 229, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'beuty and the beast.jpg', 22),
+(11, 'Leeuw - Zonnebril', 290, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'leeuw-zonnebril.jpg', 3),
+(12, 'kat-vis', 175, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'kat-vis.jpg', 2),
 (13, 'toekan', 0, 'stof', 'Nederlandse Handleiding - Linnen Canvas, 40 x 50 CM met voorbedrukte nummers - Verf in hersluitbare potjes, voorzien van nummers - Voorbeeld - Penselen (3x) - Haakjes om je meesterwerk mee op te hangen', 10, 9.95, 'toekan.jpg', 0),
 (14, 'anime-girl', 0, 'stof', 'Nederlandse Handleiding - Linnen Canvas, 40 x 50 CM met voorbedrukte nummers - Verf in hersluitbare potjes, voorzien van nummers - Voorbeeld - Penselen (3x) - Haakjes om je meesterwerk mee op te hangen', 10, 9.95, 'anime-girl.jpg', 0),
 (15, 'zee', 214, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'zee.jpg', 0),
 (16, 'olifant', 214, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'olifant.jpg', 0),
 (17, 'kinderen-papa', 289, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'zoon.jpg', 0),
-(18, 'zwaan', 224, 'stof', 'Nederlandse Handleiding - Linnen Canvas, 40 x 50 CM met voorbedrukte nummers - Verf in hersluitbare potjes, voorzien van nummers - Voorbeeld - Penselen (3x) - Haakjes om je meesterwerk mee op te hangen', 10, 9.95, 'zwaan.jpg', 0),
+(18, 'zwaan', 224, 'stof', 'Nederlandse Handleiding - Linnen Canvas, 40 x 50 CM met voorbedrukte nummers - Verf in hersluitbare potjes, voorzien van nummers - Voorbeeld - Penselen (3x) - Haakjes om je meesterwerk mee op te hangen', 10, 9.95, 'zwaan.jpg', 1),
 (19, 'cello', 245, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'cello.jpg', 0),
 (20, 'eenhoorn', 245, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'eenhoorn.jpg', 0),
 (21, 'zebra', 245, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'zebra.jpg', 0),
 (22, 'god', 214, 'stof', ' Linnen opbergzak • Linnen canvas, 50 x 40 CM met voorbedrukte nummers • Acrylverf in genummerde potjes, voldoende voor het hele schilderij • Nederlandse en Engelse handleiding • Penselen • Haakjes om je meesterwerk mee op te hangen (Let op, zonder frame) • Voorbeeld in kleur', 10, 9.95, 'god.jpg', 0);
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `token`, `verify_status`) VALUES
-(1, 'test_user', 'rockymaikel@gmail.com', 'password123', '', 0),
-(10, '123', 'lomppower@gmail.com', '123', '663cf3b4e6e777edec8a1d6ea7c0417f', 1),
-(11, 'deanus', 'deandynamite69@gmail.com', '!Persona5', '2b55f14dcd9eb7035ee6540eb3a6a9cf', 0),
-(12, 'chelsea', 'droomland23@hotmail.com', 'pwpw5035', 'dc91d4510a2b2483b5ca3ad32e0aef9b', 0),
-(13, 'Onomis', 'onomis2@outlook.com', '8jaar', '655588a92ddccf48f1cd01bcfada9fd1', 0),
-(14, 'gormeituxss', 'dillonsingh@hotmail.com', '123', 'e46e9d6cf6ef95fe1e9767bea95803b5', 0),
-(15, 'blastissue', 'felix.huel6@gmail.com', 'Felix', 'cd57329c7702799b3a1b5547d4a0352d', 0);
-
-CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `weight` int(11) DEFAULT NULL,
-  `material` varchar(50) DEFAULT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL
+-- Create the 'admin' table
+CREATE TABLE `admin` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`)
 );
 
+-- Insert data into the 'admin' table
+INSERT INTO `admin` (`id`, `name`, `password`) VALUES
+(1, 'admin', 'admin');
+
+-- Create the 'contact' table
+CREATE TABLE `contact` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `message` INT(11) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- Create the 'coupon' table
+CREATE TABLE `coupon` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `code` VARCHAR(255) NOT NULL,
+  `discount` INT(11) NOT NULL,
+  `used` INT(2) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+);
+
+-- Insert data into the 'coupon' table
+INSERT INTO `coupon` (`id`, `code`, `discount`, `used`) VALUES
+(1, 'TakemiBetter', 5, 0),
+(2, 'ec72128ced7551c7c5d13df430580dfb', 5, 0),
+(3, '70881759620a7a7943107d9605bbcd20', 5, 0),
+(4, 'b827081e442a986437a6be5dae7baeb9', 5, 0);
+
+
+-- Create the 'users' table
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `token` VARCHAR(255) NOT NULL,
+  `verify_status` INT(2) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `products` ADD PRIMARY KEY (`id`);
-ALTER TABLE `users` ADD PRIMARY KEY (`id`);
+-- Insert data into the 'users' table
+INSERT INTO `users` (`id`, `username`, `email`, `token`, `verify_status`) VALUES
+(10, '123', 'lomppower@gmail.com', '663cf3b4e6e777edec8a1d6ea7c0417f', 1),
+(11, 'deanus', 'deandynamite69@gmail.com', '2b55f14dcd9eb7035ee6540eb3a6a9cf', 0);
+
+
