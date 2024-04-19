@@ -25,7 +25,7 @@ session_start();
 
     $product = $sql->fetch(PDO::FETCH_ASSOC);
     ?>
-    <?php echo (isset($_SESSION['logged_in'])) ? '<a class="btn" href="edit.php">Edit</a>' : ''; ?>
+    <?php echo (isset($_SESSION['logged_in'])) ? '<a class="btn" href="edit.php?id='.$id.'">Edit</a>' : ''; ?>
     <div class="detail-container">
         <h2> <?php echo $product['name'] ?> </h2>
         <section class="detail-content">
