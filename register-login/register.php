@@ -43,6 +43,7 @@ require_once '../includes/db.php';
             
             <div class="form-group">
                 <input type="submit" value="Login" name="submit">
+                <a href="../homepage/index.php" class="back-link">return to homepage</a>
             </div>
         </form>
     </div>

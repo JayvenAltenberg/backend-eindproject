@@ -41,3 +41,13 @@ body {
 .status-message {
     color: green;
 }
+
+.back-link {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}

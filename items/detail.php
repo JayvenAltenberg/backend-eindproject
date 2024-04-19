@@ -30,7 +30,7 @@ session_start();
         <h2> <?php echo $product['name'] ?> </h2>
         <section class="detail-content">
 
-            <?php if ($product['stock'] > 9) : ?>
+            <?php if ($product['stock'] <= 10) : ?>
                 <p class="low-stock-text">Low Stock</p>
             <?php endif; ?>
 
@@ -44,7 +44,6 @@ session_start();
                     <input type="hidden" name="product_id" value="<?php echo $id; ?>">
                     <button type="submit" class="btn">Add to Cart</button>
                 </form>
-                <a href="products.php" class="btn">Buy Now</a>
                 <?php if (isset($_SESSION['product_status'])) {
                     echo $_SESSION['product_status'];
                     unset($_SESSION['product_status']);
