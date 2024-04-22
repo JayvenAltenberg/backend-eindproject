@@ -17,7 +17,7 @@ session_start();
     $id = $_GET['id'];
     $sql = $pdo->prepare("SELECT * FROM `products` WHERE `id` =$id");
     $sql->execute();
-    
+
     //views product
     $views = "UPDATE products SET views = views + 1 WHERE id = ?";
     $stmt = $pdo->prepare($views);
@@ -25,12 +25,14 @@ session_start();
 
     $product = $sql->fetch(PDO::FETCH_ASSOC);
     ?>
-    <?php echo (isset($_SESSION['logged_in'])) ? '<a class="btn" href="edit.php?id='.$id.'">Edit</a>' : ''; ?>
+    <?php echo (isset($_SESSION['logged_in'])) ? '<a class="btn" href="edit.php?id=' . $id . '">Edit</a>' : ''; ?>
     <div class="detail-container">
         <h2> <?php echo $product['name'] ?> </h2>
         <section class="detail-content">
 
-            <?php if ($product['stock'] <= 10) : ?>
+            <?php if ($product['stock'] <= 0) : ?>
+                <p class="low-stock-text">Out of stock</p>
+            <?php elseif ($product['stock'] <= 10) : ?>
                 <p class="low-stock-text">Low Stock</p>
             <?php endif; ?>
 
@@ -42,7 +44,10 @@ session_start();
                 <p>€<?php echo $product['price'] ?></p>
                 <form method="post" action="addToCart.php">
                     <input type="hidden" name="product_id" value="<?php echo $id; ?>">
-                    <button type="submit" class="btn">Add to Cart</button>
+                    <?php if ($product['stock'] > 0) : ?>
+                        <button type="submit" class="btn">Add to Cart</button>
+                    <?php endif; ?>
+
                 </form>
                 <?php if (isset($_SESSION['product_status'])) {
                     echo $_SESSION['product_status'];
