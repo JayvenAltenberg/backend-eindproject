@@ -67,9 +67,15 @@ if (isset($_POST['coupon_code'])) {
                 endif;
             endforeach;
         } else {
-            echo 'Your cart is empty!';
+            echo 'Your cart is empty! <br>';
         }
+        if (isset($_SESSION['bought'])) {
+            echo "<h1>{$_SESSION['bought']}</h1>";
+            unset($_SESSION['bought']);
+        }
+        
         ?>
+        
         <?php if (!empty($_SESSION['cart'])) : ?>
             <div class="total">
                 <div class="total-price">
@@ -83,7 +89,7 @@ if (isset($_POST['coupon_code'])) {
                     ?>
                 </div>
                 <div class="checkout">
-                    <a href="checkout.php">
+                    <a href="checkout.php?checkout=true">
                         <button type="button" class="btn">Checkout</button>
                     </a>
                     <div><?php echo $status; ?></div>
