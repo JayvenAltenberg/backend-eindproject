@@ -15,7 +15,7 @@
             </div>
             <div>
                 <h3>Contact Us</h3>
-                <p>Email: info@example.com<br>Phone: +123456789</p>
+                <p>Email: TakemiBetter@gmail.com<br>Phone: +123456789</p>
             </div>
         </div>
     </div>
