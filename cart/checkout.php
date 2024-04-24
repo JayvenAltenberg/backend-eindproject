@@ -23,6 +23,9 @@ if (isset($_GET['checkout']) && $_GET['checkout'] == 'true') {
             $updateCoupon->execute([1 , $coupon_code]);
         }
         unset($_SESSION['cart']);
+        unset($_SESSION['coupon']);
+        unset($_SESSION['coupon_discount']);
+        unset($_SESSION['coupon_code']);
         $_SESSION['bought'] = 'Items bought';
         header("location: cart.php");
     } else {

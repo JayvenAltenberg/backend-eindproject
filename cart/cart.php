@@ -2,21 +2,27 @@
 session_start();
 include_once "../includes/db.php";
 
-function coupon_code($pdo, $coupon_code) {
+function coupon_code($pdo, $coupon_code)
+{
     if (isset($_POST['coupon_code'])) {
         $sql = $pdo->prepare("SELECT * FROM `coupon` WHERE `code` = ?");
         $sql->execute([$coupon_code]);
         $coupon = $sql->fetch(PDO::FETCH_ASSOC);
+        if ($coupon['used'] == 0) {
 
-        if ($coupon) {
-            $_SESSION['coupon'] = true;
-            $status = "Valid coupon code";
-            $discount = $coupon['discount'];
-            $_SESSION['coupon_discount'] = $discount;
-            $_SESSION['coupon_code'] = $coupon_code;
-            return $status;
+            if ($coupon) {
+                $_SESSION['coupon'] = true;
+                $status = "Valid coupon code";
+                $discount = $coupon['discount'];
+                $_SESSION['coupon_discount'] = $discount;
+                $_SESSION['coupon_code'] = $coupon_code;
+                return $status;
+            } else {
+                $status = "Invalid coupon code";
+                return $status;
+            }
         } else {
-            $status = "Invalid coupon code";
+            $status = "Coupon code already used";
             return $status;
         }
     }
@@ -75,9 +81,9 @@ if (isset($_POST['coupon_code'])) {
             echo "<h1>{$_SESSION['bought']}</h1>";
             unset($_SESSION['bought']);
         }
-        
+
         ?>
-        
+
         <?php if (!empty($_SESSION['cart'])) : ?>
             <div class="total">
                 <div class="total-price">
