@@ -9,9 +9,11 @@ function coupon_code($pdo, $coupon_code) {
         $coupon = $sql->fetch(PDO::FETCH_ASSOC);
 
         if ($coupon) {
+            $_SESSION['coupon'] = true;
             $status = "Valid coupon code";
             $discount = $coupon['discount'];
             $_SESSION['coupon_discount'] = $discount;
+            $_SESSION['coupon_code'] = $coupon_code;
             return $status;
         } else {
             $status = "Invalid coupon code";
